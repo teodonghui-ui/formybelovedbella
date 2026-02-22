@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>For Bell Hathaichanok Phetgomol 😉</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Dancing+Script:wght@700&display=swap');
+        
+        :root {
+            --yes-scale: 1;
+        }
+
+        body {
+            font-family: 'Fredoka', sans-serif;
+            background: linear-gradient(135deg, #0a0002 0%, #3e0015 25%, #1a0008 50%, #5c001f 75%, #0a0002 100%);
+            background-size: 400% 400%;
+            animation: gradientBG 6s ease infinite;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            touch-action: none;
+            color: white;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .cursive {
+            font-family: 'Dancing Script', cursive;
+        }
+
+        .photo-frame {
+            border: 8px solid white;
+            border-bottom: 40px solid white;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
+            transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+            background-color: white;
+            object-fit: cover;
+        }
+
+        .heart-bg {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .raining-item {
+            position: absolute;
+            top: -50px;
+            animation: fallDown linear forwards;
+            opacity: 0;
+            z-index: 0;
+            filter: drop-shadow(0 2px 4px rgba(244, 63, 94, 0.2));
+            pointer-events: none;
+        }
+
+        @keyframes fallDown {
+            0% { transform: translateY(-10vh) rotate(0deg) scale(0.8); opacity: 0; }
+            10% { opacity: 1; transform: scale(1.2); }
+            90% { opacity: 1; }
+            100% { transform: translateY(110vh) rotate(720deg) scale(1.8); opacity: 0; }
+        }
+
+        #noBtn {
+            transition: all 0.15s ease-out;
+            z-index: 50;
+        }
+
+        @keyframes pulseHeart {
+            0% { transform: scale(var(--yes-scale)); box-shadow: 0 0 0 0 rgba(225, 29, 72, 0.9); }
+            50% { transform: scale(calc(var(--yes-scale) * 1.15)); box-shadow: 0 0 30px 15px rgba(225, 29, 72, 0.9), 0 0 60px 30px rgba(159, 18, 57, 0.8); }
+            100% { transform: scale(var(--yes-scale)); box-shadow: 0 0 0 0 rgba(225, 29, 72, 0); }
+        }
+
+        /* Smooth entrance for celebratory text */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); filter: blur(10px); }
+            to { opacity: 1; transform: translateY(0); filter: blur(0); }
+        }
+
+        .celebrate-entrance {
+            animation: fadeInUp 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        .voucher-card {
+            background: #fff;
+            background-image: radial-gradient(#fecdd3 1px, transparent 1px);
+            background-size: 15px 15px;
+            border: 2px dashed #fb7185;
+            color: #333;
+        }
+
+        .stamp {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 60px;
+            height: 60px;
+            border: 3px solid #e11d48;
+            border-radius: 50%;
+            color: #e11d48;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 10px;
+            transform: rotate(-15deg);
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        @keyframes subtleFloat {
+            0%, 100% { transform: rotate(-4deg) translateY(0) scale(1); }
+            50% { transform: rotate(4deg) translateY(-20px) scale(1.04); }
+        }
+    </style>
+</head>
+<body class="h-screen w-full flex flex-col items-center justify-center p-4">
+
+    <!-- ENTRY OVERLAY -->
+    <div id="entry-overlay" class="fixed inset-0 bg-black z-[200] flex flex-col items-center justify-center transition-opacity duration-1000">
+        <h2 class="cursive text-4xl sm:text-6xl text-rose-500 mb-8 animate-pulse text-center px-4">
+            I have something to ask you...
+        </h2>
+        <button id="entry-btn" onclick="startProposal()" class="bg-rose-700 hover:bg-rose-600 text-white font-bold py-4 px-10 rounded-full shadow-[0_0_40px_rgba(225,29,72,0.6)] transform transition-all duration-300 hover:scale-110 active:scale-95 text-xl border-2 border-rose-400">
+            Tap to Open 💌
+        </button>
+    </div>
+
+    <div id="heart-bg" class="heart-bg"></div>
+
+    <!-- PROPOSAL VIEW -->
+    <div id="proposal-view" class="relative z-10 text-center max-w-lg w-full flex flex-col items-center opacity-0 transition-opacity duration-1000 hidden">
+        <div id="content-container" class="flex flex-col items-center w-full transition-all duration-700">
+            <div id="imageWrapper" class="mb-8 flex flex-row justify-center items-center gap-3 sm:gap-6 w-full px-2 transition-all duration-700">
+                <img id="mainImage" src="https://i.postimg.cc/j2g1fqDS/IMG-1538.jpg" alt="Photo 1" class="photo-frame w-[45%] sm:w-48" style="animation: subtleFloat 3.5s ease-in-out infinite;">
+                <img id="secondImage" src="https://i.postimg.cc/W3pS7LLw/525024E0-EBDF-4916-B584-AB16AE032F6A.jpg" alt="Photo 2" class="photo-frame w-[45%] sm:w-48" style="animation: subtleFloat 4s ease-in-out infinite reverse;">
+            </div>
+
+            <h1 id="question" class="cursive text-3xl sm:text-5xl font-bold text-white mb-8 leading-tight drop-shadow-lg px-4 transition-all duration-500">
+                Will you be my girlfriend and allow me to be your manslut Bell Hathaichanok Phetgomol? 😉
+            </h1>
+
+            <div id="buttonContainer" class="flex flex-row justify-center items-center gap-6 min-h-[120px] w-full relative transition-all duration-500">
+                <button id="yesBtn" onclick="handleYes()" class="bg-rose-600 hover:bg-rose-700 text-white font-bold py-4 px-10 rounded-full text-xl z-20 shadow-lg transition-all duration-200" style="animation: pulseHeart 1.2s infinite;">
+                    Yes
+                </button>
+                <button id="noBtn" onmouseover="evadeButton()" ontouchstart="evadeButton()" onclick="evadeButton()" class="bg-rose-300 text-white font-bold py-4 px-10 rounded-full text-xl shadow-lg">
+                    No
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- VOUCHER VIEW -->
+    <div id="voucher-view" class="p-4 w-full flex-col items-center hidden opacity-0 transition-opacity duration-1000">
+        <div id="voucher-card" class="voucher-card w-full max-w-sm p-6 rounded-xl mb-8 relative shadow-2xl text-center">
+            <div class="border-b-2 border-rose-200 pb-3 mb-4">
+                <h2 class="cursive text-3xl text-rose-600 font-bold">Valentine's Voucher</h2>
+                <p class="text-rose-400 text-[10px] tracking-widest font-bold">OFFICIAL DATE PROOF</p>
+            </div>
+            
+            <p class="text-gray-700 text-sm sm:text-base leading-relaxed mb-6 italic px-2">
+                "ขอโทษนะที่ฉันมาช้าและไม่ได้อยู่กับเธอในวันวาเลนไทน์นี้ แต่ขอให้วอยเชอร์นี้เป็นคำสัญญาจากฉันว่า สำหรับวันวาเลนไทน์และวันพิเศษต่าง ๆ ที่จะมาถึง ฉันจะได้อยู่กับเธอเสมอ และขอให้วอยเชอร์นี้เป็นหลักฐานว่าฉันติดค้างเธอหนึ่งดินเนอร์วันวาเลนไทน์นะ 😜💕"
+            </p>
+
+            <div class="bg-rose-50 rounded-lg p-4 border border-rose-100 flex flex-col gap-2 text-left">
+                <div class="flex justify-between items-center border-b border-rose-100 pb-1">
+                    <span class="text-[10px] text-rose-400 font-bold">ISSUED BY:</span>
+                    <span class="font-bold text-gray-800">DongHui ❤️</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-[10px] text-rose-400 font-bold">VALID FOR:</span>
+                    <span class="font-bold text-gray-800 text-xs truncate ml-2">Bell Hathaichanok Phetgomol</span>
+                </div>
+            </div>
+            <div class="stamp">OFFICIAL<br>LOVE</div>
+        </div>
+
+        <button onclick="downloadVoucher()" id="saveBtn" class="bg-rose-600 text-white font-bold py-4 px-10 rounded-full shadow-xl hover:bg-rose-700 mb-4 text-lg transition-transform active:scale-95">
+            📸 Save to Photos
+        </button>
+        <button onclick="location.reload()" class="text-rose-400 underline text-sm">Play Again</button>
+    </div>
+
+    <!-- Fallback Modal -->
+    <div id="result-modal" class="fixed inset-0 bg-black/90 z-[300] hidden flex-col items-center justify-center p-4 backdrop-blur-md">
+        <div class="bg-white p-6 rounded-2xl max-w-sm w-full text-center relative shadow-2xl">
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 text-2xl">&times;</button>
+            <h3 class="text-rose-600 font-bold text-2xl mb-2 cursive">Voucher Ready!</h3>
+            <p class="text-gray-500 text-xs mb-4">Long-press image to Save to Photos</p>
+            <img id="generated-image" class="w-full h-auto rounded-lg border border-rose-100 shadow-inner" alt="Voucher">
+            <a id="download-link" class="block mt-4 text-rose-500 underline text-sm font-bold">Download File</a>
+        </div>
+    </div>
+
+    <audio id="bgMusic" loop src="https://www.dropbox.com/scl/fi/l37yuc90otnssil6h58xk/RINI-Red-Lights-ft.-Wale-Official-Lyric-Video.mp3?rlkey=wmqjwhb4ikgphtdqh5x0szwg2&st=i2dgjeq4&raw=1"></audio>
+
+    <button id="musicToggle" onclick="toggleMusic()" class="fixed bottom-6 right-6 z-[100] bg-black/50 text-white w-10 h-10 rounded-full flex items-center justify-center text-lg border border-white/20">
+        <span id="musicIcon">🔇</span>
+    </button>
+
+    <script>
+        const bgMusic = document.getElementById('bgMusic');
+        const musicIcon = document.getElementById('musicIcon');
+        const entryOverlay = document.getElementById('entry-overlay');
+        const proposalView = document.getElementById('proposal-view');
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+        const questionText = document.getElementById('question');
+        const buttonContainer = document.getElementById('buttonContainer');
+        const imageWrapper = document.getElementById('imageWrapper');
+        
+        let isMusicPlaying = false;
+        let noTriggerCount = 0;
+
+        const persuadeMessages = [
+            "Are you sure? 🥺",
+            "Really really sure? 😢",
+            "Think again! 😭",
+            "But I'm your manslut! 😈",
+            "Don't break my heart... 💔",
+            "I'll be very sad... 😿",
+            "Look at the photos again! ❤️",
+            "Just click YES already! 😘",
+            "I'm not letting you say no! 😂"
+        ];
+
+        document.addEventListener('mousemove', handleProximity);
+        document.addEventListener('touchmove', handleProximity);
+
+        function handleProximity(e) {
+            if (!noBtn || questionText.innerText.includes("Yay")) return;
+            
+            let x = e.clientX || (e.touches && e.touches[0].clientX);
+            let y = e.clientY || (e.touches && e.touches[0].clientY);
+            
+            const rect = noBtn.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            const dist = Math.sqrt(Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2));
+
+            if (dist < 100) evadeButton();
+        }
+
+        function evadeButton() {
+            if (questionText.innerText.includes("Yay")) return;
+            
+            const x = Math.random() * (window.innerWidth - 120) + 60;
+            const y = Math.random() * (window.innerHeight - 80) + 40;
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = `${x}px`;
+            noBtn.style.top = `${y}px`;
+
+            noTriggerCount++;
+            const msgIndex = Math.min(noTriggerCount - 1, persuadeMessages.length - 1);
+            questionText.innerText = persuadeMessages[msgIndex];
+            
+            // Adjusted rate: scales up by 0.08 per trigger instead of 0.2
+            const newScale = Math.min(1 + (noTriggerCount * 0.08), 3.5);
+            document.documentElement.style.setProperty('--yes-scale', newScale);
+            
+            // Adjusted font growth: 1px per trigger instead of 2px
+            yesBtn.style.fontSize = (20 + noTriggerCount * 1) + 'px';
+        }
+
+        function startProposal() {
+            bgMusic.play().then(() => {
+                isMusicPlaying = true;
+                musicIcon.innerText = '🔊';
+            }).catch(err => console.log("Music blocked or failed"));
+
+            entryOverlay.style.opacity = '0';
+            setTimeout(() => {
+                entryOverlay.style.display = 'none';
+                proposalView.classList.remove('hidden');
+                setTimeout(() => proposalView.style.opacity = '1', 50);
+            }, 1000);
+            
+            setInterval(createRainItem, 200);
+        }
+
+        function toggleMusic() {
+            if (isMusicPlaying) {
+                bgMusic.pause();
+                musicIcon.innerText = '🔇';
+            } else {
+                bgMusic.play().catch(() => {});
+                musicIcon.innerText = '🔊';
+            }
+            isMusicPlaying = !isMusicPlaying;
+        }
+
+        function handleYes() {
+            const mainImg = document.getElementById('mainImage');
+            const secImg = document.getElementById('secondImage');
+            
+            questionText.style.opacity = '0';
+            buttonContainer.style.opacity = '0';
+            
+            setTimeout(() => {
+                document.documentElement.style.setProperty('--yes-scale', 1);
+                
+                mainImg.style.opacity = '0';
+                setTimeout(() => {
+                    mainImg.src = "https://media.tenor.com/gUiu1zyxfzYAAAAi/bear-kiss-bear-kisses.gif";
+                    mainImg.style.width = "70%";
+                    mainImg.style.animation = "none";
+                    mainImg.style.transform = "rotate(0deg) scale(1.1)";
+                    mainImg.style.opacity = '1';
+                    if (secImg) secImg.style.display = 'none';
+                }, 400);
+
+                questionText.innerText = "Yay!! ฉันคิดถึงเธอมากเลยนะ Bella! แล้วเจอกันที่กรุงเทพฯ เร็ว ๆ นี้นะ! ฉันตื่นเต้นและตั้งตารอทริปของพวกเราด้วยกันมาก ๆ เลย ❤️ ฉันรักเธอ 💕";
+                questionText.className = "cursive text-2xl sm:text-4xl text-rose-300 mt-6 leading-relaxed px-4 celebrate-entrance";
+                
+                noBtn.remove();
+                buttonContainer.innerHTML = '';
+                buttonContainer.style.opacity = '1';
+
+                for(let i=0; i<150; i++) {
+                    setTimeout(createRainItem, i * 15);
+                }
+
+                setTimeout(() => {
+                    const nextBtn = document.createElement('button');
+                    nextBtn.innerHTML = "Claim Your Reward 😈⛓️";
+                    nextBtn.className = "bg-white text-rose-600 font-bold py-4 px-10 rounded-full shadow-2xl border-2 border-rose-600 mt-8 z-50 relative celebrate-entrance";
+                    nextBtn.style.animationDelay = "0.5s";
+                    nextBtn.onclick = () => {
+                        proposalView.style.opacity = '0';
+                        setTimeout(() => {
+                            proposalView.classList.add('hidden');
+                            const vView = document.getElementById('voucher-view');
+                            vView.classList.remove('hidden');
+                            vView.classList.add('flex');
+                            setTimeout(() => vView.style.opacity = '1', 50);
+                        }, 1000);
+                    };
+                    buttonContainer.appendChild(nextBtn);
+                }, 2500);
+            }, 500);
+        }
+
+        function createRainItem() {
+            const container = document.getElementById('heart-bg');
+            const item = document.createElement('div');
+            item.className = 'raining-item';
+            const icons = ['💋', '🔥', '🌶️', '🥵', '😏', '❤️‍🔥', '😈', '⛓️', '🖤', '💦'];
+            item.innerText = icons[Math.floor(Math.random() * icons.length)];
+            item.style.left = Math.random() * 100 + 'vw';
+            item.style.fontSize = Math.random() * 20 + 20 + 'px';
+            item.style.animationDuration = Math.random() * 2 + 2 + 's';
+            container.appendChild(item);
+            setTimeout(() => item.remove(), 4000);
+        }
+
+        function downloadVoucher() {
+            const card = document.getElementById('voucher-card');
+            const btn = document.getElementById('saveBtn');
+            btn.innerText = "Processing...";
+            
+            html2canvas(card, { scale: 2, backgroundColor: '#ffffff', useCORS: true }).then(canvas => {
+                const dataUrl = canvas.toDataURL('image/png');
+                const modal = document.getElementById('result-modal');
+                const genImg = document.getElementById('generated-image');
+                const link = document.getElementById('download-link');
+                
+                genImg.src = dataUrl;
+                link.href = dataUrl;
+                link.download = "ValentineVoucher.png";
+                
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                btn.innerText = "📸 Save to Photos";
+            });
+        }
+
+        function closeModal() {
+            document.getElementById('result-modal').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
